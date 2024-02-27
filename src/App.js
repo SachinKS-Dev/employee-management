@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+// Import the necessary components from react-router-dom
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import MyForm from "./MyForm";
+import EmployeeList from "./EmployeeList";
 
+// Use the Routes component in your Router
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="" element={<EmployeeList/>}/>
+                <Route path="/form" element={<MyForm/>}/>
+            </Routes>
+        </Router>
+    );
 }
-
 export default App;
