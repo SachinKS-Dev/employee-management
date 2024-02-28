@@ -60,7 +60,7 @@ function MyForm() {
             sex: '',
             department: '',
         });
-        navigate('/employee-list');
+        navigate('/');
     };
     const handleCancel = () => {
         // Add logic to reset or clear the form data if needed

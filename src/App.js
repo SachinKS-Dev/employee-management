@@ -11,8 +11,8 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
+          <Route path="/" element={<EmployeeList />} />
           <Route path="/form" element={<MyForm />} />
-          <Route path="/employee-list" element={<EmployeeList />} />
         </Routes>
       </Router>
     </Provider>
