@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+// EmployeeList.js
+import React, {useEffect} from 'react';
 import {
     Table,
     TableBody,
@@ -11,56 +12,39 @@ import {
     Button,
 } from '@mui/material';
 
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+
 
 function EmployeeList() {
-    // Sample data (replace with actual employee data)
-    const [employeeData, setEmployeeData] = useState([
-        {
-            id: 1,
-            firstName: 'John',
-            middleName: 'Doe',
-            lastName: 'Smith',
-            sex: 'Male',
-            department: 'IT',
-            dateOfJoining: "28-02-2024"
-        },
-        {
-            id: 2,
-            firstName: 'Jane',
-            middleName: 'Doe',
-            lastName: 'Johnson',
-            sex: 'Female',
-            department: 'HR',
-            dateOfJoining: "28-02-2024"
-        },
-        // Add more employee data as needed
-    ]);
+    const employeeData = useSelector((state) => state.employees);
 
     useEffect(() => {
-        // Fetch employee data from an API or other source if needed
-        // Example: fetchEmployeeData().then(data => setEmployeeData(data));
-    }, []);
+        // You can dispatch an action to fetch employee data from an API if needed
+        // Example: dispatch(fetchEmployeeData());
+    }, []); // Empty dependency array to ensure it runs only once
 
     return (
         <div style={{padding: '20px', maxWidth: '800px', margin: 'auto'}}>
-            <Typography variant="h4" gutterBottom>
-                Employee Details
-            </Typography>
-            <Link to="/form">
-                <Button variant="contained" color="primary" style={{marginBottom: '20px'}}>
-                    Add Employee
-                </Button>
-            </Link>
+            <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px'}}>
+                <Typography variant="h4" color="#305496" gutterBottom style={{fontWeight: 'bold'}}>
+                    Employee Details
+                </Typography>
+                <Link to="/form">
+                    <Button variant="contained" color="primary" style={{marginBottom: '20px'}}>
+                        Add
+                    </Button>
+                </Link>
+            </div>
 
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
-                        <TableRow>
-                            <TableCell>Employee ID</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Department</TableCell>
-                            <TableCell>Date Of Joining</TableCell>
+                        <TableRow style={{background: '#305496'}}>
+                            <TableCell style={{color: 'white'}}>Employee ID</TableCell>
+                            <TableCell style={{color: 'white'}}>Name</TableCell>
+                            <TableCell style={{color: 'white'}}>Department</TableCell>
+                            <TableCell style={{color: 'white'}}>Date Of Joining</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -70,7 +54,6 @@ function EmployeeList() {
                                 <TableCell>{employee.firstName}</TableCell>
                                 <TableCell>{employee.department}</TableCell>
                                 <TableCell>{employee.dateOfJoining}</TableCell>
-
                             </TableRow>
                         ))}
                     </TableBody>
