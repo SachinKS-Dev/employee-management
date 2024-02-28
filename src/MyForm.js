@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom';
-import store, {addEmployee} from './Store';
+import {addEmployee} from './Store';
 import {useDispatch} from "react-redux";
 import {
     TextField,
@@ -13,14 +13,12 @@ import {
     MenuItem,
     Button, Typography
 } from '@mui/material';
-import EmployeeList from "./EmployeeList";
 import {v4 as uuidv4} from 'uuid';
 
 function MyForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
-    // State to hold form data
     const [formData, setFormData] = useState({
         firstName: '',
         middleName: '',
@@ -29,7 +27,6 @@ function MyForm() {
         department: ''
     });
 
-    // Event handler for form field changes
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData({...formData, [name]: value});
@@ -37,10 +34,7 @@ function MyForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Generate an employee ID using uuid
         const employeeId = uuidv4();
-
-        // Get the current date and time
         const currentDate = new Date();
         const dateOfJoining = currentDate.toLocaleString();
 
@@ -50,9 +44,7 @@ function MyForm() {
             ...formData
         };
 
-        // Dispatch the addEmployee action with the form data
         dispatch(addEmployee(newEmployee));
-        // Reset the form data after adding an employee
         setFormData({
             firstName: '',
             middleName: '',
@@ -63,7 +55,6 @@ function MyForm() {
         navigate('/');
     };
     const handleCancel = () => {
-        // Add logic to reset or clear the form data if needed
 
         setFormData({
             firstName: '',
@@ -77,22 +68,21 @@ function MyForm() {
 
     return (
         <div style={{padding: '20px', maxWidth: '800px', margin: 'auto'}}>
-            <Typography variant="h5" color="#305496" gutterBottom style={{fontWeight: 'bold', textAlign: 'center' }}>
+            <Typography variant="h5" color="#305496" gutterBottom style={{fontWeight: 'bold', textAlign: 'center'}}>
                 EMPLOYEE DETAILS
             </Typography>
             <form>
                 <hr style={{margin: '20px 0', border: '1px solid #ccc'}}/>
-                {/* First row: Firstname, Middlename, Lastname */}
-                <div style={{display: 'flex', margin: '20px' , justifyContent:"space-between"}}>
+                <div style={{display: 'flex', margin: '20px', justifyContent: "space-between"}}>
                     <div style={{marginBottom: '20px', flexDirection: 'column', display: 'flex'}}>
                         <FormLabel>First Name</FormLabel>
-
                         <TextField
                             name="firstName"
                             value={formData.firstName}
                             onChange={handleChange}
                         />
                     </div>
+
                     <div style={{marginBottom: '20px', flexDirection: 'column', display: 'flex'}}>
                         <FormLabel>Middle Name</FormLabel>
                         <TextField
@@ -101,6 +91,7 @@ function MyForm() {
                             onChange={handleChange}
                         />
                     </div>
+
                     <div style={{marginBottom: '20px', flexDirection: 'column', display: 'flex'}}>
                         <FormLabel>Last Name</FormLabel>
                         <TextField
@@ -111,7 +102,6 @@ function MyForm() {
                     </div>
                 </div>
 
-                {/* Second row: Sex (radio buttons), Department (dropdown) */}
                 <div style={{display: 'flex', margin: '20px'}}>
                     <div style={{marginRight: '20px'}}>
                         <FormControl component="fieldset">
@@ -127,6 +117,7 @@ function MyForm() {
                             </RadioGroup>
                         </FormControl>
                     </div>
+
                     <div style={{flex: '1',}}>
                         <FormControl fullWidth>
                             <FormLabel component="legend">Department</FormLabel>
@@ -147,7 +138,6 @@ function MyForm() {
 
                 <hr style={{margin: '20px 0', border: '1px solid #ccc'}}/>
 
-                {/* Third row: Submit Button */}
                 <div style={{display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '20px'}}>
                     <Button type="button" variant="contained" color="primary" onClick={handleCancel}>
                         Cancel
@@ -156,6 +146,7 @@ function MyForm() {
                         Submit
                     </Button>
                 </div>
+
             </form>
         </div>
 

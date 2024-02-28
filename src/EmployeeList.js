@@ -1,5 +1,3 @@
-// EmployeeList.js
-import React, {useEffect} from 'react';
 import {
     Table,
     TableBody,
@@ -18,11 +16,6 @@ import {useSelector} from 'react-redux';
 
 function EmployeeList() {
     const employeeData = useSelector((state) => state.employees);
-
-    useEffect(() => {
-        // You can dispatch an action to fetch employee data from an API if needed
-        // Example: dispatch(fetchEmployeeData());
-    }, []); // Empty dependency array to ensure it runs only once
 
     return (
         <div style={{padding: '20px', maxWidth: '800px', margin: 'auto'}}>
@@ -51,7 +44,7 @@ function EmployeeList() {
                         {employeeData.map((employee) => (
                             <TableRow key={employee.id}>
                                 <TableCell>{employee.id}</TableCell>
-                                <TableCell>{employee.firstName}</TableCell>
+                                <TableCell>{employee.firstName} {employee.middleName} {employee.lastName}</TableCell>
                                 <TableCell>{employee.department}</TableCell>
                                 <TableCell>{employee.dateOfJoining}</TableCell>
                             </TableRow>
